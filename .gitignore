@@ -5,3 +5,5 @@
 ### Meteor
 .meteor/local
 .meteor/meteorite
+
+mup.json
