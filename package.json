@@ -1,0 +1,25 @@
+{
+  "name": "shapelab-web",
+  "version": "0.0.1",
+  "description": "- download and install meteor from [https://www.meteor.com/install](https://www.meteor.com/install)\r - execute ```meteor``` in the terminal inside the project folder\r - view the site on ```localhost:3000/```",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Sebkasanzew@github.com/Virality/ShapeLab-Web.git"
+  },
+  "keywords": [
+    "meteor",
+    "socket.io"
+  ],
+  "author": "Sebastian Kasanzew",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Virality/ShapeLab-Web/issues"
+  },
+  "homepage": "https://github.com/Virality/ShapeLab-Web#readme"
+}
