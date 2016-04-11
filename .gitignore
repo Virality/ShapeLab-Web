@@ -6,5 +6,9 @@
 .meteor/local
 .meteor/meteorite
 
-mup.json
+.mup/
 .settings/
+
+### Node Modules
+node_modules/
+npm-debug.log
