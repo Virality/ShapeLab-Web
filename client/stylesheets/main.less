@@ -1,1 +1,27 @@
-/* CSS declarations go here */
+html, body {
+  height: 100%;
+}
+
+body {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+
+  // center the footer
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#wrapper { // wrap the whole content to place the footer always to the bottom
+  min-height: 100%;
+  position: relative;
+  overflow: hidden; // hide the horizontal scrollbar during a transition
+}

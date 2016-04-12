@@ -19,5 +19,16 @@ standard-minifier-css
 standard-minifier-js
 
 less
-iron:router
+
+# Server Services
 http
+
+# Routing
+iron:router
+
+# Accounts
+accounts-base
+accounts-password
+useraccounts:iron-routing
+useraccounts:materialize
+materialize:materialize

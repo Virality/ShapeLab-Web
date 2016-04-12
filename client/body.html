@@ -1,0 +1,15 @@
+<template name="mainLayout">
+
+  <div id="wrapper"> <!-- We need this to position the footer always to the bottom of the page -->
+
+    {{> yield region='header'}}
+
+    <div id="content" class="container">
+      {{> yield}}
+    </div>
+
+    {{> yield region='footer'}}
+
+  </div>
+
+</template>
