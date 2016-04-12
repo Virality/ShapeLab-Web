@@ -20,6 +20,9 @@ standard-minifier-js
 
 less
 
+# UI
+materialize:materialize
+
 # Server Services
 http
 
@@ -31,4 +34,6 @@ accounts-base
 accounts-password
 useraccounts:iron-routing
 useraccounts:materialize
-materialize:materialize
+
+# Localization
+tap:i18n
