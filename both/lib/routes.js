@@ -4,7 +4,6 @@ Router.configure({
   layoutTemplate: 'mainLayout',
   yieldTemplates: {
     header: { to: 'header' },
-    nav: { to: 'nav' },
     footer: { to: 'footer' },
   }
 });
@@ -14,7 +13,6 @@ Router.route('/', {
   template: 'home',
   yieldTemplates: {
     header: { to: 'header' },
-    nav: { to: 'nav' },
     footer: { to: 'footer' },
   }
 });
