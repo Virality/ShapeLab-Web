@@ -7,8 +7,8 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "beuth": ".deploy/beuth.sh",
-    "aws": ".deploy/aws.sh"
+    "beuth": "mupx deploy --config=.mup/mup-beuth.json --settings=.settings/settings.production.json",
+    "aws": "mupx deploy --config=.mup/mup-aws.json --settings=.settings/settings.production.json"
   },
   "repository": {
     "type": "git",
