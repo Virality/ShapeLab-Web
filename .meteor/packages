@@ -34,8 +34,8 @@ accounts-base
 accounts-password
 useraccounts:iron-routing
 useraccounts:materialize
-softwarerero:accounts-t9n
 alanning:roles
 
 # Localization
 tap:i18n
+softwarerero:accounts-t9n

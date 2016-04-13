@@ -1,4 +1,5 @@
 import { Router } from 'meteor/iron:router';
+import { AccountsTemplates } from 'meteor/useraccounts:core';
 
 Router.configure({
   layoutTemplate: 'mainLayout',
@@ -15,4 +16,16 @@ Router.route('/', {
     header: { to: 'header' },
     footer: { to: 'footer' },
   }
+});
+
+Router.route('/sign-out', {
+  name: 'sign-out',
+  onBeforeAction() {
+    AccountsTemplates.logout();
+    Router.go('/');
+  }
+});
+
+Router.route('/(.*)', function () {
+  this.redirect('/');
 });
