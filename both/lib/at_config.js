@@ -5,12 +5,21 @@ const postLogout = function () {
   Router.go('/login');
 };
 
+AccountsTemplates.addField({
+  _id: 'unity_session_key',
+  type: 'text',
+  displayName: 'ShapeLab Session',
+  required: true,
+  minLength: 5,
+  maxLength: 5,
+});
+
 AccountsTemplates.configure({
   defaultLayout: 'mainLayout',
 
   // Behavior
   enablePasswordChange: true,
-  forbidClientAccountCreation: true,
+  forbidClientAccountCreation: false,
   overrideLoginErrors: true,
   sendVerificationEmail: false,
   lowercaseUsername: false,
