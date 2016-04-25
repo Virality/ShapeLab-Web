@@ -1,0 +1,10 @@
+<template name="connections">
+  <h1>Current Connections</h1>
+  {{#each connections}}
+    {{> connection}}
+  {{/each}}
+</template>
+
+<template name="connection">
+  {{_id}}
+</template>

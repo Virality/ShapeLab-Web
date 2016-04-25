@@ -1,5 +1,6 @@
-// Code inside this folder runs only on the server
+import Connections from '/both/lib/collection';
 
 Meteor.startup(function () {
-    // code to run on server at startup
+  // clear all old connection entries on startup
+  Connections.remove({});
 });

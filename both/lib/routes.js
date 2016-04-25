@@ -18,6 +18,15 @@ Router.route('/', {
   }
 });
 
+Router.route('/connections', {
+  name: 'connections',
+  template: 'connections',
+  yieldTemplates: {
+    header: { to: 'header' },
+    footer: { to: 'footer' },
+  }
+});
+
 Router.route('/sign-out', {
   name: 'sign-out',
   onBeforeAction() {
