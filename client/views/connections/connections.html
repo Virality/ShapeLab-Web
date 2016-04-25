@@ -1,10 +1,27 @@
 <template name="connections">
-  <h1>Current Connections</h1>
-  {{#each connections}}
-    {{> connection}}
-  {{/each}}
+  <div class="container">
+    <div class="row">
+      <div class="col s12"></div>
+      <h1 class="center">Current Connections</h1>
+      {{#each connections}}
+        {{> connection}}
+      {{/each}}
+    </div>
+  </div>
 </template>
 
 <template name="connection">
-  {{_id}}
+  <div class="card-panel hoverable center teal">
+    <div class="row white-text" style="margin-bottom: 0">
+      <div class="col s4">
+        ID: {{_id}}
+      </div>
+      <div class="col s4">
+        address: {{clientAddress}}
+      </div>
+      <div class="col s4">
+        host: {{httpHeaders.host}}
+      </div>
+    </div>
+  </div>
 </template>
