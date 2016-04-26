@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "A Web interface for managing the ShapeLab Unity app remotely.",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "websocket": "^1.0.22",
+    "ws": "^1.1.0"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

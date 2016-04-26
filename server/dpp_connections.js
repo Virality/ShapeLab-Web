@@ -8,6 +8,7 @@ Meteor.publish('connections', () => {
 Meteor.onConnection((connection) => {
   Connections.insert({
     _id: connection.id,
+    type: 'DDP',
     clientAddress: connection.clientAddress,
     httpHeaders: connection.httpHeaders
   });
