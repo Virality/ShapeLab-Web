@@ -1,20 +1,19 @@
 import Connections from '/both/lib/collection';
 import Fiber from 'fibers';
 
-var WebSocketServer = require('ws').Server
-  , wss = new WebSocketServer({ port: 3004 });
+const WebSocketServer = require('ws').Server;
+const wss = new WebSocketServer({ port: 3004 });
 
 wss.on('connection', function connection(ws) {
-  
-  Fiber(function () {
-    console.log('Meteor code is executing');
-    //=> Meteor code
-    var con = Connections.insert({
-      type: 'websocket'
-    });
+  let clientID;
 
-    console.log(con);
-    ws.send(con);
+  Fiber(function () {
+    clientID = Connections.insert({
+      type: 'websocket',
+      clientAddress: '123.TODO',
+      httpHeaders: {host: 'TODO.de'}
+    });
+    console.log('connected to client with ID:', clientID);
   }).run();
 
   ws.on('message', function incoming(message) {
@@ -23,9 +22,14 @@ wss.on('connection', function connection(ws) {
   });
 
   ws.on('close', function close() {
-    console.log('connection closed');
-    // Connections.remove({_id: con.id})
+    console.log('connection with', clientID ,'closed');
+
+    Fiber(function () {
+      Connections.remove({
+        _id: clientID
+      });
+    }).run();
   });
 
-  ws.send('something');
+  // ws.send('terminate');
 });

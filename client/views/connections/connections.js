@@ -3,7 +3,7 @@ import { Template } from 'meteor/templating';
 import Connections from '/both/lib/collection';
 
 Meteor.subscribe('connections', () => {
-  console.log(Connections.find().fetch())
+  Connections.find().fetch()
 });
 
 Template.connections.helpers({
