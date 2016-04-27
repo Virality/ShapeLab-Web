@@ -1,19 +1,21 @@
 import Connections from '/both/lib/collection';
-
+import Fiber from 'fibers';
 
 var WebSocketServer = require('ws').Server
   , wss = new WebSocketServer({ port: 3004 });
 
 wss.on('connection', function connection(ws) {
-  /*
-   Connections.insert({
-   type: 'websocket'
-   });
-*/
+  
+  Fiber(function () {
+    console.log('Meteor code is executing');
+    //=> Meteor code
+    var con = Connections.insert({
+      type: 'websocket'
+    });
 
-  // console.log(ws);
-  // console.log(ws);
-  // console.log(ws.connection);
+    console.log(con);
+    ws.send(con);
+  }).run();
 
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
@@ -27,8 +29,3 @@ wss.on('connection', function connection(ws) {
 
   ws.send('something');
 });
-
-
-// var WebSocketServer = require('websocket').server;
-
-

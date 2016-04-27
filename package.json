@@ -4,7 +4,7 @@
   "description": "A Web interface for managing the ShapeLab Unity app remotely.",
   "main": "index.js",
   "dependencies": {
-    "websocket": "^1.0.22",
+    "fibers": "^1.0.10",
     "ws": "^1.1.0"
   },
   "devDependencies": {},
