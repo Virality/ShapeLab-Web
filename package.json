@@ -4,7 +4,6 @@
   "description": "A Web interface for managing the ShapeLab Unity app remotely.",
   "main": "index.js",
   "dependencies": {
-    "fibers": "^1.0.10",
     "ws": "^1.1.0"
   },
   "devDependencies": {},
@@ -18,8 +17,7 @@
     "url": "https://github.com/Virality/ShapeLab-Web.git"
   },
   "keywords": [
-    "meteor",
-    "socket.io"
+    "meteor"
   ],
   "author": "Sebastian Kasanzew",
   "license": "MIT",

@@ -1,8 +1,9 @@
 import Connections from '/both/lib/collection';
-import Fiber from 'fibers';
+// import Fiber from 'fibers';
+Fiber = Npm.require('fibers');
 
 const WebSocketServer = require('ws').Server;
-const wss = new WebSocketServer({ port: 3004 });
+const wss = new WebSocketServer({ port: 8080 });
 
 wss.on('connection', function connection(ws) {
   let clientID;
