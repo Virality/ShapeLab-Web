@@ -19,7 +19,22 @@ wss.on('connection', function connection(ws) {
 
   ws.on('message', function incoming(message) {
     console.log('received: %s', message);
-    ws.send('Here you have it back (with <3 from Sebastian): ' + message);
+    if(message == "testrun")
+    {
+        ws.send("resetall");
+        ws.send("ResetAll");
+        ws.send("RESETALL");
+        ws.send("resettools");
+        ws.send("resetscreenshots");
+        ws.send("next");
+        ws.send("NextUser");
+        ws.send("nextuser");
+        ws.send("screenshot");
+        ws.send("takescreenshot");
+        
+    } else {
+        ws.send('Here you have it back (with <3 from Sebastian): ' + message);
+    }
   });
 
   ws.on('close', function close() {
