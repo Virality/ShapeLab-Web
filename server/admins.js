@@ -6,14 +6,12 @@ const admins = [
   { name: 'Elias Lerch', email: 'elias.lerch@t-online.de', roles: ['admin'] },
 ];
 
-_.each(admins, function (admin) {
+_.each(admins, (admin) => {
   if (!Meteor.users.findOne({ 'emails.address': admin.email })) {
-    let id;
-
-    id = Accounts.createUser({
-      email: admin.email,
-      password: "shapeLab!",
-      profile: { name: admin.name }
+    const id = Accounts.createUser({
+      email   : admin.email,
+      password: 'shapeLab!',
+      profile : { name: admin.name }
     });
 
     if (!admin.roles.length) {

@@ -10,8 +10,8 @@ Router.configure({
 });
 
 Router.route('/', {
-  name: 'home',
-  template: 'home',
+  name          : 'home',
+  template      : 'home',
   yieldTemplates: {
     header: { to: 'header' },
     footer: { to: 'footer' },
@@ -19,8 +19,8 @@ Router.route('/', {
 });
 
 Router.route('/connections', {
-  name: 'connections',
-  template: 'connections',
+  name          : 'connections',
+  template      : 'connections',
   yieldTemplates: {
     header: { to: 'header' },
     footer: { to: 'footer' },

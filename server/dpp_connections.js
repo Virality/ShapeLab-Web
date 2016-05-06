@@ -7,13 +7,13 @@ Meteor.publish('connections', () => {
 
 Meteor.onConnection((connection) => {
   Connections.insert({
-    _id: connection.id,
-    type: 'DDP',
+    _id          : connection.id,
+    type         : 'DDP',
     clientAddress: connection.clientAddress,
-    httpHeaders: connection.httpHeaders
+    httpHeaders  : connection.httpHeaders
   });
 
   connection.onClose(() => {
-    Connections.remove({_id: connection.id})
-  })
+    Connections.remove({ _id: connection.id });
+  });
 });
