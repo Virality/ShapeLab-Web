@@ -8,6 +8,21 @@ Meteor.subscribe('connections', () => {
   Connections.find().fetch();
 });
 
+const sendMessage = (clientID, action) => {
+  if (action) {
+    Materialize.toast(`send: ${action}`, 4000, 'rounded');
+    Connections.update({ _id: clientID }, { $push: { actions: action } });
+  } else {
+    Materialize.toast('no message to send', 4000, 'rounded');
+  }
+};
+
+Template.connection.onRendered(() => {
+  $(document).ready(() => {
+    $('select').material_select();
+  });
+});
+
 Template.connections.helpers({
   connections() {
     return Connections.find().fetch();
@@ -15,20 +30,23 @@ Template.connections.helpers({
 });
 
 Template.connection.events({
-  'click .btn': (event) => {
+  'click .btn' : (event) => {
     event.preventDefault();
     const clientID = $(event.target).data('id');
     const action = $(`#custom-message-${clientID}`).val();
-    if (action) {
-      Materialize.toast(`send: ${action}`, 4000, 'rounded');
-      Connections.update({ _id: clientID }, { $push: { actions: action } });
-    } else {
-      Materialize.toast('no message to send', 4000, 'rounded');
-    }
+    sendMessage(clientID, action);
   },
   'keyup input': (event) => {
     if (event.keyCode === 13) {
       $(event.target).parent().parent().find('.btn').click();
     }
+  },
+  'change select': (event) => {
+    const clientID = $(event.target).data('id');
+    const action = $(event.target).find('option:selected').val();
+    sendMessage(clientID, action);
+
+    // TODO reset selection to the default option
+    // $(event.target)[0].selectedIndex = 0;
   }
 });
