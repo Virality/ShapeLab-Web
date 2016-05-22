@@ -1,3 +1,3 @@
-Template.indexBanner.onRendered(function () {
+Template.indexBanner.onRendered(() => {
   $('.parallax').parallax();
 });

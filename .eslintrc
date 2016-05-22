@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "plugins": [
+    "meteor",
+    "babel"
+  ],
+  "extends": [
+    "airbnb/base",
+    "plugin:meteor/recommended"
+  ],
+  "rules": {
+    // "semi": [2, "never"]
+    "comma-dangle": [2, "only-multiline"],
+    "key-spacing": [1, {"align": "colon"}],
+    "prefer-arrow-callback": [1],
+    "arrow-body-style": [2, "always"],
+    "no-undef": [1], // TODO set error to 2 when the issue with TAPi18n is resolved
+    "func-names": [0]
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "meteor": true,
+    "node": true,
+    "browser": true,
+    "mongo": true
+  }
+}

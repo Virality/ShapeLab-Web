@@ -1,0 +1,42 @@
+<template name="connections">
+  <div class="container">
+    <div class="row">
+      <div class="col s12"></div>
+      <h3 class="center">Current Connections</h3>
+      {{#each connections}}
+        {{> connection}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="connection">
+  <div class="card-panel hoverable teal">
+    <div class="row white-text" style="margin-bottom: 0">
+      <div class="col s12 m4">
+        Client ID: {{_id}}
+      </div>
+      <div class="input-field col s12 m4">
+        <input id="custom-message-{{_id}}" type="text" class="validate" />
+        <label for="custom-message-{{_id}}">Custom message</label>
+      </div>
+      <div class="col s12 m4">
+        <button class="btn waves-effect" data-id="{{_id}}">Send
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+    <!--
+    <div class="row white-text">
+      <div class="input-field col s12">
+        <label for="predefined-message-{{_id}}">Predefined commands</label>
+        <select id="predefined-message-{{_id}}">
+          <option value="" disabled selected>Execute a command</option>
+          <option value="reset">Reset</option>
+          <option value="nextUser">Next User</option>
+        </select>
+      </div>
+    </div>
+    -->
+  </div>
+</template>

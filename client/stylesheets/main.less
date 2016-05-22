@@ -35,6 +35,47 @@ footer.page-footer {
   }
 }
 
+// Materialize CSS input field color
+.card-panel.teal {
+  /* label color */
+  .input-field label {
+    color: #FFF;
+  }
+
+  /* label focus color */
+  .input-field input[type=text]:focus + label {
+    color: #FFF;
+  }
+
+  /* label underline color */
+  .input-field input[type=text] {
+    border-bottom: 1px solid #FFF;
+  }
+
+  /* label underline focus color */
+  .input-field input[type=text]:focus {
+    border-bottom: 1px solid #FFF;
+    box-shadow: 0 1px 0 0 #FFF;
+  }
+
+  /* valid color */
+  .input-field input[type=text].valid {
+    border-bottom: 1px solid #FFF;
+    box-shadow: 0 1px 0 0 #FFF;
+  }
+
+  /* invalid color */
+  .input-field input[type=text].invalid {
+    border-bottom: 1px solid #FFF;
+    box-shadow: 0 1px 0 0 #FFF;
+  }
+
+  /* icon prefix focus color */
+  .input-field .prefix.active {
+    color: #FFF;
+  }
+}
+
 #wrapper { // wrap the whole content to place the footer always to the bottom
   min-height: 100%;
   position: relative;
