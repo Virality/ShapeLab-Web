@@ -9,15 +9,42 @@ const wss = new WebSocketServer({ port: 8080 });
 
 wss.on('connection', (ws) => {
   let clientID;
+  const actionRetryTimer = 1000;
+  // const actionTimeout = actionRetryTimer * 60;
 
+  const executeAction = (action) => {
+    ws.send(action, (error) => {
+      if (error) {
+        // console.log('Action could not be send\n', 'Error:', error);
+        setTimeout(() => {
+          executeAction(action);
+        }, actionRetryTimer); // try again after a certain period
+      } else {
+        // remove the oldest action from the collection
+        fiber(() => {
+          Connections.update({
+            _id: clientID
+          }, { $pop: { actions: -1 } });
+        }).run();
+      }
+    });
+  };
+
+  const addToErrorLog = (msg) => {
+    fiber(() => {
+      Connections.update({
+        _id: clientID
+      }, { $push: { errors: { createdAt: new Date().valueOf(), msg } } });
+    }).run();
+  };
+
+  // init collection entry after a new Unity client connects
   fiber(() => {
     clientID = Connections.insert({
       type   : 'websocket',
       actions: [],
       errors : []
     });
-
-    // console.log('connected to client with ID:', clientID);
 
     // listen to events from the Meteor collection to get
     // the messages from the browser client and redirect them to the Unity3D client
@@ -28,16 +55,7 @@ wss.on('connection', (ws) => {
           // save the oldest action
           const action = newDocument.actions[0];
 
-          ws.send(action, (error) => {
-            if (error) {
-              console.log('Action could not be send\n', 'Error:', error);
-            } else {
-              // remove the first action from the collection
-              Connections.update({
-                _id: clientID
-              }, { $pop: { actions: -1 } });
-            }
-          });
+          executeAction(action);
         }
       },
       removed() {
@@ -46,6 +64,7 @@ wss.on('connection', (ws) => {
       }
     });
 
+    // send the ID of the Unity client back
     const clientDataPackage = {
       clientID
     };
@@ -55,14 +74,6 @@ wss.on('connection', (ws) => {
 
   // these are only the messages received from the Unity3D client
   ws.on('message', (message) => {
-    const addToErrorLog = (msg) => {
-      fiber(() => {
-        Connections.update({
-          _id: clientID
-        }, { $push: { errors: { createdAt: new Date().valueOf(), msg } } });
-      }).run();
-    };
-
     switch (message) {
       case 'error':
         addToErrorLog(message);
@@ -78,7 +89,7 @@ wss.on('connection', (ws) => {
   });
 
   ws.on('close', () => {
-    console.log('connection with', clientID, 'closed');
+    // console.log('connection with', clientID, 'closed');
 
     fiber(() => {
       Connections.remove({
