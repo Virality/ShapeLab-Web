@@ -25,17 +25,17 @@ wss.on('connection', (ws) => {
       changed(newDocument) {
         // get the ws-messages from the browser client on any update for this Unity3D client
         if (newDocument.actions.length) {
-          // save the first action
+          // save the oldest action
           const action = newDocument.actions[0];
-
-          // remove the first action from the collection
-          Connections.update({
-            _id: clientID
-          }, { $pop: { actions: -1 } });
 
           ws.send(action, (error) => {
             if (error) {
               console.log('Action could not be send\n', 'Error:', error);
+            } else {
+              // remove the first action from the collection
+              Connections.update({
+                _id: clientID
+              }, { $pop: { actions: -1 } });
             }
           });
         }
