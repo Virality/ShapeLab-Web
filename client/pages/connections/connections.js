@@ -30,7 +30,7 @@ Template.connections.helpers({
 });
 
 Template.connection.events({
-  'click .btn' : (event) => {
+  'click .btn[type="submit"]': (event) => {
     event.preventDefault();
     const clientID = $(event.target).data('id');
     const action = $(`#custom-message-${clientID}`).val();
@@ -38,7 +38,7 @@ Template.connection.events({
   },
   'keyup input': (event) => {
     if (event.keyCode === 13) {
-      $(event.target).parent().parent().find('.btn').click();
+      $(event.target).closest('.card-panel').find('.btn[type="submit"]').click();
     }
   },
   'change select': (event) => {
