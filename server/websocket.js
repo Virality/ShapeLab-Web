@@ -13,7 +13,8 @@ wss.on('connection', (ws) => {
   fiber(() => {
     clientID = Connections.insert({
       type   : 'websocket',
-      actions: []
+      actions: [],
+      errors : []
     });
 
     // console.log('connected to client with ID:', clientID);
@@ -24,15 +25,19 @@ wss.on('connection', (ws) => {
       changed(newDocument) {
         // get the ws-messages from the browser client on any update for this Unity3D client
         if (newDocument.actions.length) {
-          // save the first action
+          // save the oldest action
           const action = newDocument.actions[0];
 
-          // remove the first action from the collection
-          Connections.update({
-            _id: clientID
-          }, { $pop: { actions: -1 } });
-
-          ws.send(action);
+          ws.send(action, (error) => {
+            if (error) {
+              console.log('Action could not be send\n', 'Error:', error);
+            } else {
+              // remove the first action from the collection
+              Connections.update({
+                _id: clientID
+              }, { $pop: { actions: -1 } });
+            }
+          });
         }
       },
       removed() {
@@ -50,43 +55,17 @@ wss.on('connection', (ws) => {
 
   // these are only the messages received from the Unity3D client
   ws.on('message', (message) => {
-    const addToActions = (m) => {
+    const addToErrorLog = (msg) => {
       fiber(() => {
         Connections.update({
           _id: clientID
-        }, { $push: { actions: m } });
+        }, { $push: { errors: { createdAt: new Date().valueOf(), msg } } });
       }).run();
     };
 
     switch (message) {
-      case 'reset':
-        ws.send(`received: ${message}`, (error) => {
-          if (error) {
-            console.log(error);
-          }
-        });
-        addToActions(message);
-        break;
-      case 'nextUser':
-        // feedback for client
-        ws.send(`received: ${message}`, (error) => {
-          if (error) {
-            console.log(error);
-          }
-        });
-        addToActions(message);
-        break;
-      case 'testrun':
-        ws.send('resetall');
-        ws.send('ResetAll');
-        ws.send('RESETALL');
-        ws.send('resettools');
-        ws.send('resetscreenshots');
-        ws.send('next');
-        ws.send('NextUser');
-        ws.send('nextuser');
-        ws.send('screenshot');
-        ws.send('takescreenshot');
+      case 'error':
+        addToErrorLog(message);
         break;
       default:
         ws.send(`unknown message: ${message}`, (error) => {
