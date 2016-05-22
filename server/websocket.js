@@ -13,7 +13,8 @@ wss.on('connection', (ws) => {
   fiber(() => {
     clientID = Connections.insert({
       type   : 'websocket',
-      actions: []
+      actions: [],
+      errors : []
     });
 
     // console.log('connected to client with ID:', clientID);
@@ -54,31 +55,17 @@ wss.on('connection', (ws) => {
 
   // these are only the messages received from the Unity3D client
   ws.on('message', (message) => {
-    const addToActions = (m) => {
+    const addToErrorLog = (msg) => {
       fiber(() => {
         Connections.update({
           _id: clientID
-        }, { $push: { actions: m } });
+        }, { $push: { errors: { createdAt: new Date().valueOf(), msg } } });
       }).run();
     };
 
     switch (message) {
-      case 'reset':
-        ws.send(`received: ${message}`, (error) => {
-          if (error) {
-            console.log(error);
-          }
-        });
-        addToActions(message);
-        break;
-      case 'next-user':
-        // feedback for client
-        ws.send(`received: ${message}`, (error) => {
-          if (error) {
-            console.log(error);
-          }
-        });
-        addToActions(message);
+      case 'error':
+        addToErrorLog(message);
         break;
       default:
         ws.send(`unknown message: ${message}`, (error) => {
