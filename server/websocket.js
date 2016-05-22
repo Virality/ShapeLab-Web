@@ -32,7 +32,11 @@ wss.on('connection', (ws) => {
             _id: clientID
           }, { $pop: { actions: -1 } });
 
-          ws.send(action);
+          ws.send(action, (error) => {
+            if (error) {
+              console.log('Action could not be send\n', 'Error:', error);
+            }
+          });
         }
       },
       removed() {
@@ -67,7 +71,7 @@ wss.on('connection', (ws) => {
         });
         addToActions(message);
         break;
-      case 'nextUser':
+      case 'next-user':
         // feedback for client
         ws.send(`received: ${message}`, (error) => {
           if (error) {
@@ -75,18 +79,6 @@ wss.on('connection', (ws) => {
           }
         });
         addToActions(message);
-        break;
-      case 'testrun':
-        ws.send('resetall');
-        ws.send('ResetAll');
-        ws.send('RESETALL');
-        ws.send('resettools');
-        ws.send('resetscreenshots');
-        ws.send('next');
-        ws.send('NextUser');
-        ws.send('nextuser');
-        ws.send('screenshot');
-        ws.send('takescreenshot');
         break;
       default:
         ws.send(`unknown message: ${message}`, (error) => {
