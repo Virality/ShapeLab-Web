@@ -5,6 +5,7 @@ Meteor.publish('connections', () => {
   return Connections.find({});
 });
 
+/*
 Meteor.onConnection((connection) => {
   Connections.insert({
     _id          : connection.id,
@@ -17,3 +18,4 @@ Meteor.onConnection((connection) => {
     Connections.remove({ _id: connection.id });
   });
 });
+*/
