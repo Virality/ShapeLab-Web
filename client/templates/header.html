@@ -1,5 +1,7 @@
 <template name="header">
   <header>
-    {{> nav }}
+    {{#if currentUser}}
+      {{> nav }}
+    {{/if}}
   </header>
 </template>
