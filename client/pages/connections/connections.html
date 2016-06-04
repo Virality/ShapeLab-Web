@@ -2,6 +2,25 @@
   <div class="container">
     <div class="row">
       <div class="col s12"></div>
+      <div class="card-panel hoverable teal darken-3">
+        <div class="row white-text">
+          <div class="col s12 m4">
+            <h5>Broadcast Message</h5>
+          </div>
+          <div class="col s12 m4">
+            <div class="input-field">
+              <select id="broadcast-message" class="broadcast-message">
+                <option value="" disabled selected>Execute a command</option>
+                <option value="setmaxtime 3:00">Max Time 3</option>
+                <option value="setmaxtime 5:00">Max Time 5</option>
+                <option value="setnocountdown">No Countdown</option>
+              </select>
+              <label for="broadcast-message" hidden="hidden">Broadcast Message</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <h3 class="center">Current Connections</h3>
       {{#each connections}}
         {{> connection}}
@@ -16,21 +35,25 @@
       <div class="col s12 m4">
         Client ID: {{_id}}
       </div>
-      <div class="input-field col s12 m4">
+      <div class="col s12 m4">
         <div class="row">
           <div class="col s12">
-            <input id="custom-message-{{_id}}" type="text" class="validate"/>
-            <label for="custom-message-{{_id}}">Custom message</label>
+            <div class="input-field">
+              <input id="custom-message-{{_id}}" type="text" class="validate"/>
+              <label for="custom-message-{{_id}}">Custom message</label>
+            </div>
           </div>
           <div class="col s12">
             <div class="input-field">
-              <select id="predefined-message-{{_id}}" data-id="{{_id}}">
+              <select id="predefined-message-{{_id}}" class="client-message"  data-id="{{_id}}">
                 <option value="" disabled selected>Execute a command</option>
                 <option value="reset-all">Reset All</option>
                 <option value="reset-tools">Reset Tools</option>
                 <option value="next-user">Next User</option>
                 <option value="reset-screenshots">Reset Screenshots</option>
                 <option value="take-screenshot">Take Screenshot</option>
+                <option value="removelastscreenshot">Remove last Screenshot</option>
+                <option value="resetoculusposition">Reset Oculus position</option>
               </select>
               <label for="predefined-message-{{_id}}" hidden="hidden">Predefined commands</label>
             </div>
