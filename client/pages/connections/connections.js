@@ -55,13 +55,13 @@ Template.connections.events({
 });
 
 Template.connection.events({
-  'click .btn[type="submit"]'   : (event) => {
+  'click #submit.btn[type="submit"]': (event) => {
     event.preventDefault();
     const clientID = $(event.target).data('id');
     const action = $(`#custom-message-${clientID}`).val();
     sendMessage(clientID, action);
   },
-  'keyup input'                 : (event) => {
+  'keyup input': (event) => {
     if (event.keyCode === 13) {
       $(event.target).closest('.card-panel').find('.btn[type="submit"]').click();
     }
@@ -73,5 +73,39 @@ Template.connection.events({
 
     // TODO reset selection to the default option
     // $(event.target)[0].selectedIndex = 0;
+  },
+  'click #next-user.btn': (event) => {
+    event.preventDefault();
+    const action = 'next-user';
+    const clientID = $(event.target).data('id');
+    sendMessage(clientID, action);
+  },
+  'click .btn-floating': (event) => {
+    const $buttonColorSelect = $(event.target);
+    const $card = $buttonColorSelect.parentsUntil('.card-panel').parent();
+
+    let color = 'black';
+    if ($buttonColorSelect.hasClass('red')) {
+      if ($card.hasClass('red')) {
+        color = 'grey';
+      } else {
+        color = 'red';
+      }
+    } else if ($buttonColorSelect.hasClass('green')) {
+      if ($card.hasClass('green')) {
+        color = 'grey';
+      } else {
+        color = 'green';
+      }
+    } else if ($buttonColorSelect.hasClass('blue')) {
+      if ($card.hasClass('blue')) {
+        color = 'grey';
+      } else {
+        color = 'blue';
+      }
+    }
+
+    $card.removeClass('grey red green blue');
+    $card.addClass(color);
   }
 });
