@@ -35,44 +35,61 @@ footer.page-footer {
   }
 }
 
+.control-buttons {
+  .card-panel {
+    cursor: pointer;
+  }
+}
+
 // Materialize CSS input field color
-.card-panel.teal {
-  /* label color */
-  .input-field label {
-    color: #FFF;
-  }
+.card-panel {
 
-  /* label focus color */
-  .input-field input[type=text]:focus + label {
-    color: #FFF;
-  }
+  .input-field {
 
-  /* label underline color */
-  .input-field input[type=text] {
-    border-bottom: 1px solid #FFF;
-  }
+    /* label color */
+    label {
+      color: #FFF;
+      left: 0;
+    }
 
-  /* label underline focus color */
-  .input-field input[type=text]:focus {
-    border-bottom: 1px solid #FFF;
-    box-shadow: 0 1px 0 0 #FFF;
-  }
+    /* label underline color */
+    input[type=text] {
+      border-bottom: 1px solid #FFF;
 
-  /* valid color */
-  .input-field input[type=text].valid {
-    border-bottom: 1px solid #FFF;
-    box-shadow: 0 1px 0 0 #FFF;
-  }
+      /* label focus color */
+      &:focus + label {
+        color: #FFF;
+      }
 
-  /* invalid color */
-  .input-field input[type=text].invalid {
-    border-bottom: 1px solid #FFF;
-    box-shadow: 0 1px 0 0 #FFF;
-  }
+      /* label underline focus color */
+      &:focus {
+        border-bottom: 1px solid #FFF;
+        box-shadow: 0 1px 0 0 #FFF;
+      }
 
-  /* icon prefix focus color */
-  .input-field .prefix.active {
-    color: #FFF;
+      /* valid color */
+      .valid {
+        border-bottom: 1px solid #FFF;
+        box-shadow: 0 1px 0 0 #FFF;
+      }
+
+      /* invalid color */
+      .invalid {
+        border-bottom: 1px solid #FFF;
+        box-shadow: 0 1px 0 0 #FFF;
+      }
+    }
+
+    /* icon prefix focus color */
+    .prefix.active {
+      color: #FFF;
+    }
+  }
+}
+
+.select-wrapper {
+  span.caret {
+    color: white;
   }
 }
 

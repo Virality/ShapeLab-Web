@@ -38,3 +38,10 @@ Router.route('/sign-out', {
 Router.route('/(.*)', function () {
   this.redirect('/');
 });
+
+// ensure a signed in user for the user related pages
+Router.plugin('ensureSignedIn', {
+  only: [
+    'connections'
+  ]
+});

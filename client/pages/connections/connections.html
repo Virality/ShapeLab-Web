@@ -2,7 +2,26 @@
   <div class="container">
     <div class="row">
       <div class="col s12"></div>
-      <h3 class="center">Current Connections</h3>
+      <div class="card-panel hoverable blue darken-4">
+        <div class="row white-text">
+          <div class="col s12 m4">
+            <h5>Broadcast Message</h5>
+          </div>
+          <div class="col s12 m4">
+            <div class="input-field">
+              <select id="broadcast-message" class="broadcast-message">
+                <option value="" disabled selected>Execute a command</option>
+                <option value="setmaxtime 3:00">Max Time 3</option>
+                <option value="setmaxtime 5:00">Max Time 5</option>
+                <option value="setnocountdown">No Countdown</option>
+              </select>
+              <label for="broadcast-message" hidden="hidden">Broadcast Message</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="center white-text">Current Connections</h3>
       {{#each connections}}
         {{> connection}}
       {{/each}}
@@ -11,32 +30,75 @@
 </template>
 
 <template name="connection">
-  <div class="card-panel hoverable teal">
+  <div class="card-panel hoverable grey">
     <div class="row white-text" style="margin-bottom: 0">
       <div class="col s12 m4">
-        Client ID: {{_id}}
-      </div>
-      <div class="input-field col s12 m4">
-        <input id="custom-message-{{_id}}" type="text" class="validate" />
-        <label for="custom-message-{{_id}}">Custom message</label>
+        <div class="row">
+          <div class="col s12">
+            Client ID: {{_id}}
+          </div>
+          <br/><br/><br/>
+          <div class="col s12">
+            <div class="row">
+              <div id="color-picker" class="col s4">
+                <button class="waves-effect waves-circle waves-light btn-floating secondary-content red">
+                  R
+                </button>
+              </div>
+              <div class="col s4">
+                <button class="waves-effect waves-circle waves-light btn-floating secondary-content green">
+                  G
+                </button>
+              </div>
+              <div class="col s4">
+                <button class="waves-effect waves-circle waves-light btn-floating secondary-content blue">
+                  B
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="col s12 m4">
-        <button class="btn waves-effect" data-id="{{_id}}">Send
-          <i class="material-icons right">send</i>
-        </button>
+        <div class="row">
+          <div class="col s12">
+            <div class="input-field white-text">
+              <input id="custom-message-{{_id}}" type="text" class="validate"/>
+              <label for="custom-message-{{_id}}">Custom message</label>
+            </div>
+          </div>
+          <div class="col s12">
+            <div class="input-field">
+              <select id="predefined-message-{{_id}}" class="client-message white-text"  data-id="{{_id}}">
+                <option class="blue-text" value="" disabled selected>Execute a command</option>
+                <option class="blue-text" value="reset-all">Reset All</option>
+                <option class="blue-text" value="reset-tools">Reset Tools</option>
+                <option class="blue-text" value="next-user">Next User</option>
+                <option class="blue-text" value="reset-screenshots">Reset Screenshots</option>
+                <option class="blue-text" value="take-screenshot">Take Screenshot</option>
+                <option class="blue-text" value="removelastscreenshot">Remove last Screenshot</option>
+                <option class="blue-text" value="resetoculusposition">Reset Oculus position</option>
+              </select>
+              <label for="predefined-message-{{_id}}" hidden="hidden">Predefined commands</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col s12 m4">
+        <div class="row">
+          <div class="col s12">
+            <button id="submit" type="submit" class="btn btn-large grey darken-2 waves-effect" data-id="{{_id}}">Send
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+          <br/><br/><br/>
+          <div class="col s12">
+            <button id="next-user" type="submit" class="btn btn-large grey darken-2 waves-effect" data-id="{{_id}}">Next User
+              <i class="material-icons right">send</i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-    <!--
-    <div class="row white-text">
-      <div class="input-field col s12">
-        <label for="predefined-message-{{_id}}">Predefined commands</label>
-        <select id="predefined-message-{{_id}}">
-          <option value="" disabled selected>Execute a command</option>
-          <option value="reset">Reset</option>
-          <option value="nextUser">Next User</option>
-        </select>
-      </div>
-    </div>
-    -->
   </div>
 </template>

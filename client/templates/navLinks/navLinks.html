@@ -1,7 +1,7 @@
 <template name="navLinks">
   {{#unless currentUser }}
-    <li><a href="/login">Admin Login</a></li>
+    <li><a href="/login" class="white-text">Admin Login</a></li>
   {{ else }}
-    <li><a href="/sign-out">Logout</a></li>
+    <li><a href="/sign-out" class="white-text">Logout</a></li>
   {{/unless }}
 </template>
